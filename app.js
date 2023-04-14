@@ -15,7 +15,7 @@ app.listen(2500 , function(){
 });
 
 let items = ["Buy Food" , "Cook Food" , "Eat Food"] ;
-
+let workItems = [] ;
 app.get("/" , function(req,res){
     
     let today = new Date() ;
@@ -39,4 +39,15 @@ app.post("/" , function(req, res){
     items.push(item) ;
 
     res.redirect("/");
+})
+
+app.get("/work" , function(req,res){
+
+    res.render("list" , {kindOfDay: "Work List" , newlistitems : workItems}) ;
+})
+
+app.post("/work" , function(req,res){
+    let item = req.body.newItem ;
+    workItems.push(item) ;
+    res.redirect("/work") ;
 })
